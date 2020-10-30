@@ -27,7 +27,7 @@ public class Game {
 			ChessPiece toMove = fromTile.getPiece();
 
 			Tile toTile = board.getBoardArray()[to.Y()][to.X()];
-			toTile.setPiece(pieceToMove);
+			toTile.setPiece(toMove);
 
 			fromTile.empty();
 			endTurn();
@@ -46,7 +46,7 @@ public class Game {
 
 	private void endTurn() {
 		currentPlayer = (currentPlayer == PieceColor.White)
-			? PieceColor.Black;
+			? PieceColor.Black
 			: PieceColor.White;
 	}
 
@@ -60,7 +60,7 @@ public class Game {
 		for(Tuple location : locations) {
 			Tile fromTile = board.getTileFromTuple(location);
 			ChessPiece piece = fromTile.getPiece();
-			Tuple[] possibleMoves = validMoves(piece, location);
+			Tuple[] possibleMoves = validMovesForPiece(piece, location);
 
 			for(Tuple newLocation : possibleMoves) {
 				Tile toTile = board.getTileFromTuple(newLocation);
@@ -87,7 +87,7 @@ public class Game {
 	}
 
 	private boolean isKingCheck(PieceColor kingColor) {
-		Tuple kingLocation = board.getKingLocation(kingColor);
+		Tuple kingLocation = board.getKingLoc(kingColor);
 		return canOpponentTakeLocation(kingLocation, kingColor);
 	}
 
@@ -250,7 +250,7 @@ public class Game {
 					ChessPiece toPiece = toTile.getPiece();
 					return fromPiece.getColor() != toPiece.getColor();
 				}else if(move.firstMoveOnly) return toTile.isEmpty() && isFirstMoveForPawn(from, board);
-				else return toTile.esEmpty();
+				else return toTile.isEmpty();
 			}
 		}
 		return false;

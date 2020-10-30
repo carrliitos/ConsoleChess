@@ -8,7 +8,7 @@ import chess.pieces.*;
 import java.util.ArrayList;
 
 public class Board {
-	private finale Tile[][] board;
+	private final Tile[][] board;
 
 	public Board() {
 		board = new Tile[8][8];
@@ -30,8 +30,8 @@ public class Board {
 	public Tuple getKingLoc(ChessPiece.PieceColor color) {
 		Tuple location = new Tuple(-1, -1);
 		for(int i = 0; i <= 7; i++) {
-			for(j = 0; j <= 7; j++) {
-				if(!board[j][i].esEmpty()) {
+			for(int j = 0; j <= 7; j++) {
+				if(!board[j][i].isEmpty()) {
 					ChessPiece piece = board[j][i].getPiece();
 					if(piece.getColor() == color && piece instanceof King)
 						location = new Tuple(i, j);
@@ -47,7 +47,7 @@ public class Board {
 
 	public Tuple[] getAllPieces(ChessPiece.PieceColor color) {
 		ArrayList<Tuple> locations = new ArrayList<>();
-		for(int i = 0; y <= 7; i++) {
+		for(int i = 0; i <= 7; i++) {
 			for(int j = 0; j <= 7; j++) {
 				if(!board[j][i].isEmpty() && board[j][i].getPiece().getColor() == color)
 					locations.add(new Tuple(i, j));
