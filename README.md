@@ -3,6 +3,15 @@
 
 This is a console based chess game written in Java
 
+## To run
+
+Make sure all programs are compiled, then run:
+
+```
+cd src/main/java
+java Program
+```
+
 Move 1 for Player 1: B1-C3
 
 ![Player 1 Move 1](./img/move1.png)
